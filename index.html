@@ -1,0 +1,68 @@
+<html>
+<head>
+    <title>Unrealized PNL Calculator</title>
+	
+	
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+	
+	
+
+	
+</head>
+<body>
+     <label for="contractSearch">Search Contract:</label><br>
+    <input type="text" id="contractSearch" oninput="filterContracts()"><br>
+    <label for="contract">Contract:</label><br>
+    <select id="contract" name="contract">
+     
+    </select><br>
+    <label for="entryPrice">Entry Price:</label><br>
+    <input type="number" id="entryPrice" name="entryPrice" oninput="calculateSizeOrQuantity()"><br>
+    <label for="size">Size:</label><br>
+    <input type="number" id="size" name="size" oninput="calculateSizeOrQuantity('quantity')"><br>
+    <label for="quantity">Quantity:</label><br>
+    <input type="number" id="quantity" name="quantity" oninput="calculateSizeOrQuantity('size')"><br>
+    <label for="leverage">Leverage:</label><br>
+    <input type="range" id="leverageSlider" name="leverage" min="1" max="125" value="1" oninput="updateLeverageInput(this.value)"><br>
+    <input type="number" id="leverageInput" name="leverage" min="1" max="125" value="1" oninput="updateLeverageSlider(this.value)"><br>
+    <br>
+    <button onclick="addPosition('long')">Long</button>
+	    <button onclick="addPosition('short')">Short</button>
+    <button onclick="refreshPrices()">Refresh Prices</button>
+	<button onclick="downloadLocalStorage()">Download Settings</button>
+	<input type="file" id="jsonFile" name="jsonFile" onchange="importLocalStorage()" style="display: none;">
+	<button onclick="document.getElementById('jsonFile').click();">Import Settings</button>
+
+		
+
+    <br>
+ <label for="filterCheckbox">Show only selected contract:</label>
+<input type="checkbox" id="filterCheckbox" name="filterCheckbox" onchange="loadPositions()">
+ <label for="sort">Sort by:</label>
+    <select id="sort" onchange="loadPositions()">
+        <option value="order">Order</option>
+        <option value="contract">Contract</option>
+    </select>
+	
+	
+    
+    <table id="positionsTable">
+        <tr>
+            <th>Contract</th>
+            <th>Leverage</th>
+            <th>Position Size</th>
+            <th>Quantity</th>
+            <th>Entry Price</th>
+            <th>Current Price</th>
+            <th>(%ROI) PNL</th>
+            <th>Margin</th>
+            <th>Actions</th>
+
+        </tr>
+    </table>
+   
+<script src="script.js"></script>
+
+</body>
+</html>
